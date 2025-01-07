@@ -257,15 +257,16 @@
 
           // Display the data
           dataDisplay.innerHTML = `
-            <div><span>სახელი და გვარი:</span> ${wallet.user.firstName} ${wallet.user.lastName}</div>
+            <div><span>Saxeli da Gvari:</span> ${wallet.user.firstName} ${wallet.user.lastName}</div>
             <div><span>UserID:</span> ${wallet.user.userId}</div>
-            <div><span>მოთხოვნილი გატანა/გატანები:</span> ${pendingAmounts.join(", ") || "None"}</div>
-            <div><span>დღევანდელი დეპოზიტი:</span> ${todayDeposit}</div>
-            <div><span>დღევანდელი გატანა:</span> ${todayWithdraw}</div>
-            <div><span>დარეგისტრირდა:</span> ${verifiedAt}</div>
-            <div><span>ჯამური გატანა:</span> ${totalWithdraw}</div>
-            <div><span>ჯამური დეპოზიტი:</span> ${totalDeposit}</div>
-            <div><span>ბალანსი ბოლო გატანის შემდეგ:</span> ${balanceAfterWithdrawal.toFixed(2)}</div>
+            <div><span>Motxovnili Gatana/Gatanebi:</span> ${pendingAmounts.join(", ") || "None"}</div>
+            <div><span>Dgevandeli Depoziti:</span> ${todayDeposit}</div>
+            <div><span>Dgevandeli Gatana:</span> ${todayWithdraw}</div>
+            <div><span>Daregistrirda:</span> ${verifiedAt}</div>
+            <div><span>Jamuri Gatana:</span> ${totalWithdraw}</div>
+            <div><span>Jamuri Depoziti:</span> ${totalDeposit}</div>
+            <div><span>Balansze Darcha:</span> ${balanceAfterWithdrawal.toFixed(2)}</div>
+            <div><span>Provaideri:</span>შეავსეთ მონაცემები</div>
           `;
         } catch (error) {
           errorMessage.textContent = "Error fetching data: " + error.message;
