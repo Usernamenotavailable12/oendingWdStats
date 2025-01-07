@@ -252,41 +252,6 @@
 
           const balanceAfterWithdrawal = parseFloat(wallet.currentBalance) - pendingAmounts.reduce((sum, val) => sum + parseFloat(val), 0);
 
-          // 5. Fetch game round connection
-          const gameRoundResponse = await fetch("https://www.ambassadoribet.com/_internal/gql", {
-            method: "POST",
-            headers,
-            body: JSON.stringify({
-              query: `query GameRoundConnection($userId: ID, $createdAtFrom: DateTime, $createdAtTo: DateTime) {
-                gameRoundConnection(userId: $userId, minWinAmount: "200", createdAtFrom: $createdAtFrom, createdAtTo: $createdAtTo) {
-                  edges {
-                    node {
-                      provider
-                      realWinAmount
-                    }
-                  }
-                }
-              }`,
-              variables: { userId, createdAtFrom: from, createdAtTo: to }
-            })
-          });
-
-          const gameRoundData = await gameRoundResponse.json();
-          const gameRounds = gameRoundData.data.gameRoundConnection.edges;
-
-          const providers = [...new Set(gameRounds.map(edge => edge.node.provider))];
-          const winsByProvider = gameRounds.reduce((acc, edge) => {
-            const provider = edge.node.provider;
-            const winAmount = parseFloat(edge.node.realWinAmount);
-            if (!acc[provider]) acc[provider] = 0;
-            acc[provider] += winAmount;
-            return acc;
-          }, {});
-
-          const winsDisplay = Object.entries(winsByProvider)
-            .map(([provider, totalWin]) => `${provider}: ${totalWin.toFixed(2)}`)
-            .join(", ");
-
           // Convert VerifiedAt to normal format
           const verifiedAt = new Date(wallet.user.verifiedAt).toLocaleString();
 
@@ -301,7 +266,7 @@
             <div><span>Jamuri Gatana:</span> ${totalWithdraw}</div>
             <div><span>Jamuri Depoziti:</span> ${totalDeposit}</div>
             <div><span>Balansze Darcha:</span> ${balanceAfterWithdrawal.toFixed(2)}</div>
-            <div><span>Provaideri(ebi):</span> ${winsDisplay}</div>
+            <div><span>Provaideri:</span>შეავსეთ მონაცემები</div>
           `;
         } catch (error) {
           errorMessage.textContent = "Error fetching data: " + error.message;
