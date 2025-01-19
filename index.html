@@ -288,7 +288,7 @@
             .join(", ");
 
           // Convert VerifiedAt to normal format
-          const verifiedAt = new Date(wallet.user.verifiedAt).toLocaleString();
+          const verifiedAt = new Date(wallet.user.verifiedAt).toISOString().split('T')[0];
 
           // Display the data
           dataDisplay.innerHTML = `
