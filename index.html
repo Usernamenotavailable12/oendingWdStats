@@ -208,7 +208,7 @@
             headers,
             body: JSON.stringify({
               query: `query PaymentConnection($userId: ID) {
-                paymentConnection(userId: $userId, statuses: PENDING) {
+                paymentConnection(userId: $userId, statuses: PENDING_APPROVAL) {
                   edges {
                     node {
                       amount
