@@ -156,9 +156,27 @@
         event.preventDefault();
         const userId = document.getElementById("userid").value;
 
-        const today = new Date();
-        const from = new Date(today.setHours(0, 0, 0, 0)).toISOString();
-        const to = new Date(today.setHours(23, 59, 59, 999)).toISOString();
+const now = new Date();
+
+// Convert current time to UTC and then add 4 hours to get the UTC+4 time
+const utcTimestamp = now.getTime() + now.getTimezoneOffset() * 60000;
+const nowUTC4 = new Date(utcTimestamp + 4 * 3600000);
+
+// Extract the UTC+4 date parts
+const year = nowUTC4.getFullYear();
+const month = nowUTC4.getMonth();
+const day = nowUTC4.getDate();
+
+// For UTC+4, midnight (00:00:00.000) is 4 hours behind in UTC,
+// so we subtract 4 from the hour when creating the UTC timestamp.
+const from = new Date(Date.UTC(year, month, day, -4, 0, 0, 0)).toISOString();
+
+// Similarly, 23:59:59.999 in UTC+4 corresponds to (23 - 4 = 19) in UTC.
+const to = new Date(Date.UTC(year, month, day, 23 - 4, 59, 59, 999)).toISOString();
+
+console.log(from);
+console.log(to);
+
 
         try {
           const headers = {
